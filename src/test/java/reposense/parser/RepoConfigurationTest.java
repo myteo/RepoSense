@@ -2,7 +2,6 @@ package reposense.parser;
 
 import static org.apache.tools.ant.types.Commandline.translateCommandline;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -29,15 +28,15 @@ import reposense.util.FileUtil;
 import reposense.util.TestUtil;
 
 public class RepoConfigurationTest {
-    private static final Path IGNORE_STANDALONE_TEST_CONFIG_FILES = new File(CsvParserTest.class.getClassLoader()
-            .getResource("RepoConfigurationTest/repoconfig_ignoreStandAlone_test").getFile()).toPath();
+    private static final Path IGNORE_STANDALONE_TEST_CONFIG_FILES = FileUtil.getResourcePath(CsvParserTest.class,
+            "RepoConfigurationTest/repoconfig_ignoreStandAlone_test");
     private static final Path IGNORE_STANDALONE_KEYWORD_TEST_CONFIG_FILES =
-            new File(CsvParserTest.class.getClassLoader()
-                    .getResource("RepoConfigurationTest/repoconfig_ignoreStandAloneKeyword_test").getFile()).toPath();
-    private static final Path FORMATS_TEST_CONFIG_FILES = new File(CsvParserTest.class.getClassLoader()
-            .getResource("RepoConfigurationTest/repoconfig_formats_test").getFile()).toPath();
-    private static final Path WITHOUT_FORMATS_TEST_CONFIG_FILES = new File(CsvParserTest.class.getClassLoader()
-            .getResource("RepoConfigurationTest/repoconfig_withoutformats_test").getFile()).toPath();
+            FileUtil.getResourcePath(CsvParserTest.class,
+                    "RepoConfigurationTest/repoconfig_ignoreStandAloneKeyword_test");
+    private static final Path FORMATS_TEST_CONFIG_FILES = FileUtil.getResourcePath(CsvParserTest.class,
+            "RepoConfigurationTest/repoconfig_formats_test");
+    private static final Path WITHOUT_FORMATS_TEST_CONFIG_FILES = FileUtil.getResourcePath(CsvParserTest.class,
+            "RepoConfigurationTest/repoconfig_withoutformats_test");
 
     private static final String TEST_REPO_DELTA = "https://github.com/reposense/testrepo-Delta.git";
 

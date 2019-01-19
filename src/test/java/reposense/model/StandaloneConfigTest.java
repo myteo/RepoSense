@@ -1,6 +1,5 @@
 package reposense.model;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -14,23 +13,24 @@ import com.google.gson.JsonSyntaxException;
 
 import reposense.parser.StandaloneConfigJsonParser;
 import reposense.template.GitTestTemplate;
+import reposense.util.FileUtil;
 
 public class StandaloneConfigTest extends GitTestTemplate {
 
-    private static final Path VALID_CONFIG = new File(StandaloneConfigTest.class.getClassLoader()
-            .getResource("StandaloneConfigTest/valid_config.json").getFile()).toPath();
-    private static final Path INVALID_IGNOREGLOB_CONFIG = new File(StandaloneConfigTest.class.getClassLoader()
-            .getResource("StandaloneConfigTest/lithiumlkid_invalidIgnoreGlob_config.json").getFile()).toPath();
-    private static final Path INVALID_FORMATS_CONFIG = new File(StandaloneConfigTest.class.getClassLoader()
-            .getResource("StandaloneConfigTest/invalidFormats_config.json").getFile()).toPath();
-    private static final Path INVALID_IGNORECOMMIT_CONFIG = new File(StandaloneConfigTest.class.getClassLoader()
-            .getResource("StandaloneConfigTest/invalidIgnoreCommit_config.json").getFile()).toPath();
-    private static final Path SPECIAL_CHARACTER_AUTHOR_CONFIG = new File(StandaloneConfigTest.class.getClassLoader()
-            .getResource("StandaloneConfigTest/specialCharacterAuthor_config.json").getFile()).toPath();
-    private static final Path AUTHORS_TRAILING_COMMAS_CONFIG = new File(StandaloneConfigTest.class.getClassLoader()
-            .getResource("StandaloneConfigTest/authors_trailingCommas_config.json").getFile()).toPath();
-    private static final Path LITHIUMLKID_TRAILING_COMMAS_CONFIG = new File(StandaloneConfigTest.class.getClassLoader()
-            .getResource("StandaloneConfigTest/lithiumlkid_trailingCommas_config.json").getFile()).toPath();
+    private static final Path VALID_CONFIG = FileUtil.getResourcePath(StandaloneConfig.class,
+            "StandaloneConfigTest/valid_config.json");
+    private static final Path INVALID_IGNOREGLOB_CONFIG = FileUtil.getResourcePath(StandaloneConfig.class,
+            "StandaloneConfigTest/lithiumlkid_invalidIgnoreGlob_config.json");
+    private static final Path INVALID_FORMATS_CONFIG = FileUtil.getResourcePath(StandaloneConfig.class,
+            "StandaloneConfigTest/invalidFormats_config.json");
+    private static final Path INVALID_IGNORECOMMIT_CONFIG = FileUtil.getResourcePath(StandaloneConfig.class,
+            "StandaloneConfigTest/invalidIgnoreCommit_config.json");
+    private static final Path SPECIAL_CHARACTER_AUTHOR_CONFIG = FileUtil.getResourcePath(StandaloneConfig.class,
+            "StandaloneConfigTest/specialCharacterAuthor_config.json");
+    private static final Path AUTHORS_TRAILING_COMMAS_CONFIG = FileUtil.getResourcePath(StandaloneConfig.class,
+            "StandaloneConfigTest/authors_trailingCommas_config.json");
+    private static final Path LITHIUMLKID_TRAILING_COMMAS_CONFIG = FileUtil.getResourcePath(StandaloneConfig.class,
+            "StandaloneConfigTest/lithiumlkid_trailingCommas_config.json");
 
     private static final Author FIRST_SPECIAL_CHARACTER_AUTHOR = new Author("‘Processed�‘Cooked�");
     private static final Author SECOND_SPECIAL_CHARACTER_AUTHOR = new Author("(codeeong)");

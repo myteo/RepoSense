@@ -2,7 +2,6 @@ package reposense.parser;
 
 import static org.apache.tools.ant.types.Commandline.translateCommandline;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,18 +17,19 @@ import reposense.model.CommitHash;
 import reposense.model.ConfigCliArguments;
 import reposense.model.RepoConfiguration;
 import reposense.model.RepoLocation;
+import reposense.util.FileUtil;
 
 public class CsvParserTest {
-    private static final Path TEST_CONFIG_FOLDER = new File(CsvParserTest.class.getClassLoader()
-            .getResource("repoconfig_merge_test").getFile()).toPath();
-    private static final Path TEST_EMPTY_BRANCH_CONFIG_FOLDER = new File(CsvParserTest.class.getClassLoader()
-            .getResource("repoconfig_empty_branch_test").getFile()).toPath();
-    private static final Path REPO_CONFIG_NO_SPECIAL_CHARACTER_FILE = new File(CsvParserTest.class.getClassLoader()
-            .getResource("CsvParserTest/repoconfig_noSpecialCharacter_test.csv").getFile()).toPath();
-    private static final Path AUTHOR_CONFIG_NO_SPECIAL_CHARACTER_FILE = new File(CsvParserTest.class.getClassLoader()
-            .getResource("CsvParserTest/authorconfig_noSpecialCharacter_test.csv").getFile()).toPath();
-    private static final Path AUTHOR_CONFIG_SPECIAL_CHARACTER_FILE = new File(CsvParserTest.class.getClassLoader()
-            .getResource("CsvParserTest/authorconfig_specialCharacter_test.csv").getFile()).toPath();
+    private static final Path TEST_CONFIG_FOLDER = FileUtil.getResourcePath(CsvParser.class,
+            "repoconfig_merge_test");
+    private static final Path TEST_EMPTY_BRANCH_CONFIG_FOLDER = FileUtil.getResourcePath(CsvParser.class,
+            "repoconfig_empty_branch_test");
+    private static final Path REPO_CONFIG_NO_SPECIAL_CHARACTER_FILE = FileUtil.getResourcePath(CsvParser.class,
+            "CsvParserTest/repoconfig_noSpecialCharacter_test.csv");
+    private static final Path AUTHOR_CONFIG_NO_SPECIAL_CHARACTER_FILE = FileUtil.getResourcePath(CsvParser.class,
+            "CsvParserTest/authorconfig_noSpecialCharacter_test.csv");
+    private static final Path AUTHOR_CONFIG_SPECIAL_CHARACTER_FILE = FileUtil.getResourcePath(CsvParser.class,
+            "CsvParserTest/authorconfig_specialCharacter_test.csv");
 
     private static final String TEST_REPO_BETA_LOCATION = "https://github.com/reposense/testrepo-Beta.git";
     private static final String TEST_REPO_BETA_BRANCH = "master";

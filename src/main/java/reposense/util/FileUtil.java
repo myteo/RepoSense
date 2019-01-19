@@ -161,6 +161,10 @@ public class FileUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Path getResourcePath(Class resourceClass, String resourceString) {
+        return new File(resourceClass.getClassLoader().getResource(resourceString).getFile()).toPath();
+    }
+
     /**
      * Returns true if the {@code path} contains one of the {@code fileTypes} extension.
      */

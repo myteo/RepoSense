@@ -1,6 +1,5 @@
 package reposense.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,8 +11,8 @@ import org.junit.Test;
 
 public class FileUtilTest {
 
-    private static final Path FILE_UTIL_TEST_DIRECTORY = new File(FileUtilTest.class.getClassLoader()
-            .getResource("FileUtilTest").getFile()).toPath().toAbsolutePath();
+    private static final Path FILE_UTIL_TEST_DIRECTORY = FileUtil.getResourcePath(FileUtilTest.class,
+            "FileUtilTest");
     private static final Path ARCHIVE_ZIP_PATH = Paths.get(FILE_UTIL_TEST_DIRECTORY.toString(),
             FileUtil.ZIP_FILE);
     private static final Path EXPECTED_UNZIPPED_DIRECTORY_PATH = Paths.get(FILE_UTIL_TEST_DIRECTORY.toString(),

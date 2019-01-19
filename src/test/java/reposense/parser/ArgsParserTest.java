@@ -2,7 +2,6 @@ package reposense.parser;
 
 import static org.apache.tools.ant.types.Commandline.translateCommandline;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,15 +22,16 @@ import reposense.model.Format;
 import reposense.model.LocationsCliArguments;
 import reposense.model.RepoConfiguration;
 import reposense.model.ViewCliArguments;
+import reposense.util.FileUtil;
 import reposense.util.TestUtil;
 
 public class ArgsParserTest {
 
     private static final Path PROJECT_DIRECTORY = Paths.get(System.getProperty("user.dir"));
-    private static final Path CONFIG_FOLDER_ABSOLUTE = new File(ArgsParserTest.class.getClassLoader()
-            .getResource("cli_location_test").getFile()).toPath();
-    private static final Path OUTPUT_DIRECTORY_ABSOLUTE = new File(ArgsParserTest.class.getClassLoader()
-            .getResource("output").getFile()).toPath();
+    private static final Path CONFIG_FOLDER_ABSOLUTE = FileUtil.getResourcePath(ArgsParserTest.class,
+            "cli_location_test");
+    private static final Path OUTPUT_DIRECTORY_ABSOLUTE = FileUtil.getResourcePath(ArgsParserTest.class,
+            "output");
     private static final Path CONFIG_FOLDER_RELATIVE = PROJECT_DIRECTORY.relativize(CONFIG_FOLDER_ABSOLUTE);
     private static final Path OUTPUT_DIRECTORY_RELATIVE = PROJECT_DIRECTORY.relativize(OUTPUT_DIRECTORY_ABSOLUTE);
     private static final String DEFAULT_MANDATORY_ARGS = "-config " + CONFIG_FOLDER_ABSOLUTE + " ";

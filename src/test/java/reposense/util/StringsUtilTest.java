@@ -1,6 +1,5 @@
 package reposense.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,8 +11,8 @@ import org.junit.Test;
 
 public class StringsUtilTest {
 
-    private static final Path STRINGS_UTIL_TEST_DIRECTORY = new File(FileUtilTest.class.getClassLoader()
-            .getResource("StringsUtilTest").getFile()).toPath().toAbsolutePath();
+    private static final Path STRINGS_UTIL_TEST_DIRECTORY = FileUtil.getResourcePath(FileUtilTest.class,
+            "StringsUtilTest").toAbsolutePath();
 
     @Test
     public void filterText_standardInput_success() throws IOException {
