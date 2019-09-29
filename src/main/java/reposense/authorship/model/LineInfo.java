@@ -10,6 +10,7 @@ import reposense.model.Author;
 public class LineInfo {
     private int lineNumber;
     private Author author;
+    private Author trueBlameAuthor;
     private String content;
 
     private transient boolean isTracked;
@@ -25,8 +26,16 @@ public class LineInfo {
         return author;
     }
 
+    public Author getTrueBlameAuthor() {
+        return trueBlameAuthor;
+    }
+
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public void setTrueBlameAuthor(Author author) {
+        this.trueBlameAuthor = author;
     }
 
     public int getLineNumber() {

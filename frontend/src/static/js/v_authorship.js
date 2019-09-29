@@ -123,23 +123,27 @@ window.vAuthorship = {
 
     splitSegments(lines) {
       // split into segments separated by authored
-      let lastState;
+      let lastAuthorState;
+      let lastTrueAuthorState;
       let lastId = -1;
       const segments = [];
       let blankLineCount = 0;
 
       lines.forEach((line, lineCount) => {
         const authored = (line.author && line.author.gitId === this.info.author);
+        const trueAuthored = (line.author && line.trueBlameAuthor.gitId === this.info.author);
 
-        if (authored !== lastState || lastId === -1) {
+        if (authored !== lastAuthorState || trueAuthored !== lastTrueAuthorState || lastId === -1) {
           segments.push({
             authored,
+            trueAuthored,
             lines: [],
             lineNumbers: [],
           });
 
           lastId += 1;
-          lastState = authored;
+          lastAuthorState = authored;
+          lastTrueAuthorState = trueAuthored;
         }
 
         const content = line.content || ' ';

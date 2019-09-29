@@ -31,4 +31,11 @@ public class GitBlame {
 
         return StringsUtil.filterText(runCommand(rootPath, blameCommand), COMBINATION_REGEX);
     }
+
+    public static String blamePrior(String root, String fileDirectory, String commitHash, int lineNumber) {
+        Path rootPath = Paths.get(root);
+        String blameCommand = String.format("git blame -w --line-porcelain %s^ -L %d,+1 -- %s", commitHash, lineNumber, fileDirectory);
+
+        return StringsUtil.filterText(runCommand(rootPath, blameCommand), COMBINATION_REGEX);
+    }
 }

@@ -26,6 +26,11 @@ public class FileResultAggregator {
                     continue;
                 }
                 authorContributionSummary.addAuthorContributionCount(author, fileResult.getFileType());
+                Author trueBlameAuthor = lineInfo.getTrueBlameAuthor();
+                if (!authors.contains(trueBlameAuthor) || author.equals(trueBlameAuthor)) {
+                    continue;
+                }
+                authorContributionSummary.addAuthorContributionCount(trueBlameAuthor, fileResult.getFileType());
             }
         }
         return authorContributionSummary;

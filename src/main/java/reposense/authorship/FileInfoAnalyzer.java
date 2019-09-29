@@ -27,9 +27,9 @@ public class FileInfoAnalyzer {
     private static final Logger logger = LogsManager.getLogger(FileInfoAnalyzer.class);
 
     private static final String REUSED_TAG = "//@reused";
-    private static final int AUTHOR_NAME_OFFSET = "author ".length();
-    private static final int AUTHOR_EMAIL_OFFSET = "author-mail ".length();
-    private static final int FULL_COMMIT_HASH_LENGTH = 40;
+    public static final int AUTHOR_NAME_OFFSET = "author ".length();
+    public static final int AUTHOR_EMAIL_OFFSET = "author-mail ".length();
+    public static final int FULL_COMMIT_HASH_LENGTH = 40;
 
     /**
      * Analyzes the lines of the file, given in the {@code fileInfo}, that has changed in the time period provided
@@ -64,7 +64,11 @@ public class FileInfoAnalyzer {
         HashMap<Author, Integer> authorContributionMap = new HashMap<>();
         for (LineInfo line : fileInfo.getLines()) {
             Author author = line.getAuthor();
+            Author trueBlameAuthor = line.getTrueBlameAuthor();
             authorContributionMap.put(author, authorContributionMap.getOrDefault(author, 0) + 1);
+            if (!trueBlameAuthor.equals(author)) {
+                authorContributionMap.put(trueBlameAuthor, authorContributionMap.getOrDefault(trueBlameAuthor, 0) + 1);
+            }
         }
         return new FileResult(fileInfo.getPath(), fileInfo.getFileType(), fileInfo.getLines(), authorContributionMap);
     }
@@ -90,6 +94,16 @@ public class FileInfoAnalyzer {
             }
 
             fileInfo.setLineAuthor(lineCount / 3, author);
+
+            Author trueBlameAuthor = Author.UNKNOWN_AUTHOR;
+
+            if (fileInfo.isFileLineTracked(lineCount / 3)) {
+                trueBlameAuthor = TrueBlameAnalyzer.analyzeTrueBlame(
+                        config, commitHash, fileInfo.getPath(),
+                        fileInfo.getLine(lineCount / 3 + 1).getContent(), author
+                );
+            }
+            fileInfo.setTrueBlameAuthor(lineCount / 3, trueBlameAuthor);
         }
     }
 

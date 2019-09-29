@@ -65,6 +65,13 @@ public class FileInfo {
     }
 
     /**
+     * Sets the true blame {@code Author} of the {@code LineInfo} in {@code lineNumber} for this {@code FileInfo}.
+     */
+    public void setTrueBlameAuthor(int lineNumber, Author author) {
+        lines.get(lineNumber).setTrueBlameAuthor(author);
+    }
+
+    /**
      * Returns true if the {@code LineInfo} in {@code lineNumber} index is being tracked.
      */
     public boolean isFileLineTracked(int lineNumber) {

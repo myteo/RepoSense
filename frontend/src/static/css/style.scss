@@ -582,8 +582,20 @@ header {
       border-left: .25rem solid mui-color('green');
 
       .code {
-        background-color: mui-color('green', '50');
+        background-color: mui-color('green', '100');
         padding-left: 1rem;
+      }
+
+      &.trueAuthor {
+        .code {
+          background-color: mui-color('green', '50');
+        }
+      }
+
+      &.author {
+        .code {
+          background-color: mui-color('grey', '200');
+        }
       }
 
       .line-number {
