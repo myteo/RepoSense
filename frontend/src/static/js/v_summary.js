@@ -659,6 +659,21 @@ window.vSummary = {
       });
     },
 
+    openTabAuthorshipCommit(hash, user, repo, index) {
+      const { minDate, maxDate } = this;
+
+      this.$emit('view-commit', {
+        hash,
+        minDate,
+        maxDate,
+        author: user.name,
+        repo: user.repoName,
+        name: user.displayName,
+        location: this.getRepoLink(repo[index]),
+        totalCommits: user.totalCommits,
+      });
+    },
+
     openTabZoomSubrange(userOrig) {
       // skip if accidentally clicked on ramp chart
       if (drags.length === 2 && drags[1] - drags[0]) {

@@ -38,6 +38,11 @@ window.vRamp = {
           + `since=${slice.date}'T'00:00:00+08:00&`
           + `until=${untilDate}'T'23:59:59+08:00`;
     },
+
+    onRampSliceClick(commit) {
+      this.$emit('load-commit', commit['hash']);
+    },
+
     getMergedLink(user, slice, untilDate) {
       const { REPOS } = window;
 

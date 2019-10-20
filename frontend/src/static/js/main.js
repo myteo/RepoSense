@@ -202,6 +202,10 @@ window.app = new window.Vue({
       this.tabInfo.tabZoom = Object.assign({}, obj);
       this.activateTab('zoom');
     },
+    updateTabCommit(obj) {
+      this.tabInfo.tabCommit = Object.assign({}, obj);
+      this.activateTab('commit');
+    },
 
     // updating summary view
     updateSummaryDates(since, until) {
@@ -277,6 +281,7 @@ window.app = new window.Vue({
     v_zoom: window.vZoom,
     v_summary: window.vSummary,
     v_authorship: window.vAuthorship,
+    v_commit: window.vCommit,
     CircleSpinner: window.VueLoadingSpinner.Circle,
   },
   created() {

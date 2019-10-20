@@ -1,0 +1,41 @@
+#commit
+    .toolbar
+        a(v-if="activeFilesCount === 0", v-on:click="expandAll(true)") Expand all
+        a(v-else, v-on:click="expandAll(false)") Collapse all
+    .title
+        a.repoName.large-font(
+            v-bind:href="info.location", target="_blank",
+            v-bind:title="'Click to open the repo'"
+        ) {{ info.repo }}
+        .author.medium-font
+            span &#8627; &nbsp;
+            span {{ info.name }} ({{ info.author }})
+        .period.medium-font
+            span &#8627; &nbsp;
+            span {{ info.minDate }} to {{ info.maxDate }}
+
+    .files(v-if="isLoaded")
+        p
+            .full-commit
+                p
+                    .medium-large-font {{ title  }}
+                pre {{ message }}
+                p
+                    .medium-bold-font {{ "Author: " + author }}
+                p
+                    .medium-bold-font {{ "Date: " + date }}
+                p
+                    .medium-bold-font {{ "Commit hash: " + hash }}
+
+        p
+            div(v-for="file in diffs")
+                .file.active(v-bind:key="file.fileName")
+                    .title
+                        span.path.medium-large-font(onclick="toggleNext(this.parentNode)", v-on:click="updateCount") {{ file.fileName }}&nbsp;
+                    pre.hljs
+                        .segment.active(v-for="line in file.hunks", v-bind:class="{ zero: line.type === 0, first: line.type === 1, second: line.type ===2 }")
+                            div(v-hljs="file.fileName")
+                                .code
+                                    .line-content {{ line.line + "\n" }}
+
+    .empty(v-else) loading...

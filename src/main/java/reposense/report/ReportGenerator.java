@@ -217,7 +217,7 @@ public class ReportGenerator {
         updateRepoConfig(config);
         updateAuthorList(config);
 
-        CommitContributionSummary commitSummary = CommitsReporter.generateCommitSummary(config);
+        CommitContributionSummary commitSummary = CommitsReporter.generateCommitSummary(repoReportDirectory, config);
         AuthorshipSummary authorshipSummary = AuthorshipReporter.generateAuthorshipSummary(config);
         generateIndividualRepoReport(repoReportDirectory, commitSummary, authorshipSummary);
         logger.info(String.format(MESSAGE_COMPLETE_ANALYSIS, config.getLocation(), config.getBranch()));

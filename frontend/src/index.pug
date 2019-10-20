@@ -33,6 +33,7 @@ html
             v-bind:error-messages="errorMessages",
             v-on:view-zoom="updateTabZoom",
             v-on:view-authorship="updateTabAuthorship",
+            v-on:view-commit="updateTabCommit",
             v-on:get-dates="receiveDates"
           ).tab-padding
           .timestamp-footer
@@ -58,6 +59,10 @@ html
                 v-if="tabType === 'authorship'"
                 v-bind:key="generateKey(tabInfo.tabAuthorship)",
                 v-bind:info="tabInfo.tabAuthorship")
+              v_commit#tab-commit.tab-pane(
+                v-else-if="tabType === 'commit'"
+                v-bind:key="generateKey(tabInfo.tabCommit)",
+                v-bind:info="tabInfo.tabCommit")
               v_zoom#tab-zoom.tab-pane(
                 v-else-if="tabType === 'zoom'",
                 v-bind:key="generateKey(tabInfo.tabZoom)",
@@ -217,6 +222,7 @@ html
               )
                 v_ramp(
                     v-bind:groupby="filterGroupSelection",
+                    v-on:load-commit="openTabAuthorshipCommit($event, user, repo, i)",
                     v-bind:user="user",
                     v-bind:tframe="filterTimeFrame",
                     v-bind:sdate="filterSinceDate",
@@ -257,12 +263,16 @@ html
     vuetemplate#v_segment
       include tabs/segment.pug
 
+    vuetemplate#v_commit
+      include tabs/commit.pug
+
     vuetemplate#v_authorship
       include tabs/authorship.pug
 
     script(src="static/js/api.js")
     script(src="static/js/safari_date.js")
     script(src="static/js/v_ramp.js")
+    script(src="static/js/v_commit.js")
     script(src="static/js/v_zoom.js")
     script(src="static/js/v_segment.js")
     script(src="static/js/v_summary.js")

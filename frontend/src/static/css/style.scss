@@ -55,6 +55,24 @@ a {
   font-weight: normal;
 }
 
+.full-commit {
+  padding: 8px 8px 8px 8px;
+  margin: 10px 0;
+  background: #eaf5ff;
+  border: 1px solid rgba(27,31,35,.15);
+  border-radius: 3px;
+}
+
+.medium-bold-font {
+  font-size: .95rem;
+  font-weight: bold;
+}
+
+.medium-large-font {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .large-font {
   font-size: 1.5rem;
   font-weight: bold;
@@ -664,6 +682,94 @@ header {
             }
           }
         }
+      }
+    }
+  }
+
+  .empty {
+    text-align: center;
+  }
+}
+
+#tab-commit {
+  .toolbar {
+    cursor: pointer;
+    float: right;
+  }
+
+  .title {
+    .repoName {
+      cursor: pointer;
+    }
+
+    .author {
+      margin-left: .3rem;
+    }
+
+    .period {
+      margin-left: 2rem;
+    }
+  }
+
+  .files {
+    clear: left;
+
+    .file {
+      pre {
+        display: none;
+      }
+
+      &.active {
+        pre {
+          display: grid;
+
+          .hljs {
+            // overwrite hljs library
+            display: inherit;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    .title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-top: 1rem;
+
+      .path {
+        cursor: pointer;
+      }
+    }
+
+    .segment {
+      border-left: .25rem solid mui-color('green');
+
+      .code {
+        $grey: mui-color('grey', '400');
+        padding-left: 1rem;
+      }
+
+      &.zero {
+        .code {
+          background-color: mui-color('blue', '50');
+        }
+      }
+
+      &.first {
+        .code {
+          background-color: mui-color('green', '50');
+        }
+      }
+
+      &.second {
+        .code {
+          background-color: mui-color('red', '50');
+        }
+      }
+
+      .line-content {
+        padding-left: 2rem;
       }
     }
   }
