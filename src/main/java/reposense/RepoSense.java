@@ -60,11 +60,21 @@ public class RepoSense {
 
             RepoConfiguration.setFormatsToRepoConfigs(configs, cliArguments.getFormats());
             RepoConfiguration.setDatesToRepoConfigs(configs, cliArguments.getSinceDate(), cliArguments.getUntilDate());
+            // start time
+            long startTime = System.nanoTime();
+
             List<Path> reportFoldersAndFiles = ReportGenerator.generateReposReport(configs,
                     cliArguments.getOutputFilePath().toAbsolutePath().toString(),
                     formatter.format(ZonedDateTime.now(cliArguments.getZoneId())),
                     cliArguments.getSinceDate(), cliArguments.getUntilDate(),
                     cliArguments.isSinceDateProvided(), cliArguments.isUntilDateProvided());
+
+            // end time
+            long endTime = System.nanoTime();
+            long timeElapsed = endTime - startTime;
+            System.out.println("Execution time in milliseconds : " + timeElapsed / 1000000 + "ms");
+            System.out.println("Execution time in seconds : " + timeElapsed / 1000000000 + "s");
+
             FileUtil.zipFoldersAndFiles(reportFoldersAndFiles, cliArguments.getOutputFilePath().toAbsolutePath(),
                     ".json");
 

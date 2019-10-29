@@ -94,9 +94,13 @@ class Diff {
 
     public Diff(String rawDiff) {
         String diffHeader = rawDiff.substring(0, rawDiff.indexOf("\n"));
-        String[] fileNames = diffHeader.split(" ");
-        preImageFileName = fileNames[0].substring(2);
-        postImageFileName = fileNames[1].substring(2);
+        Pattern fileNames = Pattern.compile("^a/(?<preImageFileName>.+?) b/(?<postImageFileName>.+)$");
+        Matcher matcher = fileNames.matcher(diffHeader);
+
+        if (matcher.matches()) {
+            preImageFileName = matcher.group("preImageFileName");
+            postImageFileName = matcher.group("postImageFileName");
+        }
 
         String[] diffLines = rawDiff.split("\n");
         int i = 1;
@@ -106,7 +110,7 @@ class Diff {
                 // TODO: d2 might not be  present
                 Pattern hunkPattern =
                         Pattern.compile("^@@ -(?<d1>\\d+),(?<d2>\\d+) \\+(?<d3>\\d+),(?<d4>\\d+).*$");
-                Matcher matcher = hunkPattern.matcher(diffLines[i]);
+                matcher = hunkPattern.matcher(diffLines[i]);
                 if (matcher.matches()) {
                     Hunk hunk = new Hunk(Integer.parseInt(matcher.group("d1")));
                     i++;
